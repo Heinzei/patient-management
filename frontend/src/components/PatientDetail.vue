@@ -1,50 +1,56 @@
 <template>
-  <div>
-    <div v-if="loading">Lade...</div>
-    <div v-else-if="patient">
-      <h2>{{ patient.firstName }} {{ patient.lastName }}</h2>
-      <p>Geburtsdatum: {{ patient.birthDate }}</p>
-      <p>Geschlecht: {{ patient.gender }}</p>
-      <p>Notizen: {{ patient.notes }}</p>
-      <router-link :to="`/patients/${patient.id}/edit`">Bearbeiten</router-link>
-      |
-      <button @click="remove">Löschen</button>
-      <br /><br />
-      <router-link to="/">Zurück zur Liste</router-link>
+  <div class="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Patientendetails</h2>
+
+    <div class="space-y-2 text-left">
+      <p><strong>Vorname:</strong> {{ patient.firstName }}</p>
+      <p><strong>Nachname:</strong> {{ patient.lastName }}</p>
+      <p><strong>Geburtsdatum:</strong> {{ patient.birthDate }}</p>
+      <p><strong>Geschlecht:</strong> {{ patient.gender }}</p>
+      <p><strong>Straße:</strong> {{ patient.street }}</p>
+      <p><strong>Hausnummer:</strong> {{ patient.houseNumber }}</p>
+      <p><strong>PLZ:</strong> {{ patient.zip }}</p>
+      <p><strong>Wohnort:</strong> {{ patient.city }}</p>
+      <p><strong>Land:</strong> {{ patient.country }}</p>
     </div>
-    <div v-else>Patient nicht gefunden</div>
+
+    <router-link
+      to="/"
+      class="block mt-6 bg-blue-600 text-white text-center px-6 py-2 rounded-xl hover:bg-blue-700"
+    >
+      Zurück zur Liste
+    </router-link>
   </div>
 </template>
 
-<script lang="ts">
-import { ref, onMounted } from 'vue';
-import { fetchPatient, deletePatient } from '../services/api';
-import { useRoute, useRouter } from 'vue-router';
+<script lang="ts" setup>
+import { defineProps } from 'vue';
 
-export default {
-  setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const patient = ref<any | null>(null);
-    const loading = ref(true);
+interface Patient {
+  id: number;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  gender: string;
+  street?: string;
+  houseNumber?: string;
+  zip?: string;
+  city?: string;
+  country?: string;
+}
 
-    onMounted(async () => {
-      try {
-        patient.value = await fetchPatient(route.params.id as string);
-      } catch {
-        patient.value = null;
-      } finally {
-        loading.value = false;
-      }
-    });
+defineProps<{ id: string }>();
 
-    const remove = async () => {
-      if (!patient.value) return;
-      await deletePatient(patient.value.id);
-      router.push('/');
-    };
-
-    return { patient, loading, remove };
-  }
+const patient: Patient = {
+  id: 1,
+  firstName: 'Anna',
+  lastName: 'Müller',
+  birthDate: '1990-05-12',
+  gender: 'weiblich',
+  street: 'Hauptstraße',
+  houseNumber: '12A',
+  zip: '12345',
+  city: 'Berlin',
+  country: 'Deutschland',
 };
 </script>

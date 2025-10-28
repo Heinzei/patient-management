@@ -1,10 +1,14 @@
 [
   {
-    "id": 1761668603924,
-    "firstName": "Johannes",
-    "lastName": "Heinz",
-    "birthDate": "1998-01-24",
-    "gender": "male",
-    "notes": "Ich bin ein neuer Patient"
+    "id": 1,
+    "firstName": "Anna",
+    "lastName": "Müller",
+    "birthDate": "1990-05-12",
+    "gender": "weiblich",
+    "street": "Hauptstraße",
+    "houseNumber": "12A",
+    "zip": "12345",
+    "city": "Berlin",
+    "country": "Deutschland"
   }
 ]

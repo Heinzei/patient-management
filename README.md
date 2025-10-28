@@ -42,3 +42,22 @@ Kurzer Beschreibung der Architektur
 Abgabe
 
 Kurze Präsentation (max. 15 Minuten) bei Übergabe
+
+# Patientenverwaltungssystem (Vue 3 + TypeScript, Node.js + Express)
+
+## Inhalt
+- `backend` — Express API (TypeScript)
+- `frontend` — Vue 3 + TypeScript (Vite)
+
+## Voraussetzungen
+- Node.js >= 18
+- npm oder pnpm oder yarn
+
+## Installation & Start (lokal)
+
+### Backend
+```bash
+cd backend
+npm install
+npm run dev
+# Server läuft unter http://localhost:3000
